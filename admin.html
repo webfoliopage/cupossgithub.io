@@ -1,0 +1,335 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Administración - Gestión de Pasantías</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="profile">
+        <div class="avatar">
+          <i class="fas fa-user-shield"></i>
+        </div>
+        <div class="profile-info">
+          <h2>Administrador</h2>
+          <p class="role">Super Admin</p>
+        </div>
+      </div>
+      
+      <div class="menu-section">
+        <h3 class="section-title">Navegación</h3>
+        <ul class="menu-admin">
+          <li onclick="mostrarSeccion('formulario')" class="menu-item">
+            <i class="fas fa-plus-circle"></i> 
+            <span>Registrar Prácticas</span>
+          </li>
+          <li onclick="mostrarSeccion('registros')" class="menu-item active">
+            <i class="fas fa-list-alt"></i> 
+            <span>Ver Registros</span>
+          </li>
+          <li onclick="mostrarSeccion('aprobar-usuarios')" class="menu-item">
+            <i class="fas fa-user-check"></i> 
+            <span>Aprobar Usuarios</span>
+            <span id="pending-users-badge" class="badge">0</span>
+          </li>
+          <li onclick="mostrarSeccion('gestion-recursos')" class="menu-item">
+            <i class="fas fa-cog"></i> 
+            <span>Gestión de Recursos</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="menu-section">
+        <h3 class="section-title">Filtrar por Carrera</h3>
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="buscar-carrera" placeholder="Buscar carrera...">
+        </div>
+        
+        <ul class="lista-carreras">
+          <li data-carrera="PSICOLOGIA">Psicología</li>
+          <li data-carrera="LABORATORIO CLINICO">Laboratorio Clínico</li>
+          <li data-carrera="ENFERMERIA">Enfermería</li>
+          <li data-carrera="TECNICOS EN ENFERMERIA">Técnicos en Enfermería</li>
+          <li data-carrera="TECNICOS EN REHABILITACION">Técnicos en Rehabilitación</li>
+          <li data-carrera="TECNICOS EN LABORATORIO">Técnicos en Laboratorio</li>
+          <li data-carrera="APH">APH</li>
+          <li data-carrera="AUXILIAR EN ENFERMERIA">Auxiliar en Enfermería</li>
+          <li data-carrera="MEDICINA">Medicina</li>
+          <li data-carrera="FISIOTERAPIA">Fisioterapia</li>
+          <li data-carrera="NUTRICION">Nutrición</li>
+          <li data-carrera="BIOQUIMICA">Bioquímica</li>
+          <li data-carrera="AUXILIAR DE FARMACIA">Auxiliar de Farmacia</li>
+          <li data-carrera="ODONTOLOGIA">Odontología</li>
+        </ul>
+      </div>
+      
+      <div class="logout-section">
+        <a href="login.html" class="logout-link">
+          <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+        </a>
+      </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+      <!-- Sección de formulario -->
+      <section id="formulario" class="content-section" style="display:none;">
+        <div class="card">
+          <div class="card-header">
+            <h1><i class="fas fa-clipboard-list"></i> Registrar Nueva Información</h1>
+          </div>
+          <form id="registroForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="institucionSolicitante">Institución Solicitante:</label>
+                <select id="institucionSolicitante" required>
+                  <option value="">Seleccione una institución</option>
+                  <option>UNIVERSIDAD INDOAMERICA</option>
+                  <option>UNIVERSIDAD TÉCNICA DE AMBATO</option>
+                  <option>UNACH</option>
+                  <option>UTA</option>
+                  <option>PUCE</option>
+                  <option>ESPOCH</option>
+                  <option>JATUN YACHAY WASI</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="carrera">Carrera:</label>
+                <select id="carrera" required>
+                  <option value="">Seleccione una carrera</option>
+                  <option value="PSICOLOGIA">Psicología</option>
+                  <option value="LABORATORIO CLINICO">Laboratorio Clínico</option>
+                  <option value="ENFERMERIA">Enfermería</option>
+                  <option value="TECNICOS EN ENFERMERIA">Técnicos en Enfermería</option>
+                  <option value="TECNICOS EN REHABILITACION">Técnicos en Rehabilitación</option>
+                  <option value="TECNICOS EN LABORATORIO">Técnicos en Laboratorio</option>
+                  <option value="APH">APH</option>
+                  <option value="AUXILIAR EN ENFERMERIA">Auxiliar en Enfermería</option>
+                  <option value="MEDICINA">Medicina</option>
+                  <option value="FISIOTERAPIA">Fisioterapia</option>
+                  <option value="NUTRICION">Nutrición</option>
+                  <option value="BIOQUIMICA">Bioquímica</option>
+                  <option value="AUXILIAR DE FARMACIA">Auxiliar de Farmacia</option>
+                  <option value="ODONTOLOGIA">Odontología</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="distritoAsignado">Distrito Asignado:</label>
+                <select id="distritoAsignado" required onchange="cargarUnidadesSalud()">
+                  <option value="">Seleccione un distrito</option>
+                  <option value="06D01">06D01 ZONA</option>
+                  <option value="06D02">06D02 ALAUSI CHUNCHI</option>
+                  <option value="06D04">06D04 COLTA GUAMOTE</option>
+                  <option value="05D01">05D01 LATACUNGA</option>
+                  <option value="05D03">05D03 PANGUA LA MANA</option>
+                  <option value="05D04">05D04 PUJILI SAQUISILI</option>
+                  <option value="05D06">05D06 SALCEDO</option>
+                  <option value="16D01">16D01 PASTAZA</option>
+                  <option value="18D02">18D02 AMBATO</option>
+                  <option value="18D04">18D04 PATATE PELILEO</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="unidadSalud">Unidad de Salud:</label>
+                <select id="unidadSalud" required disabled>
+                  <option value="">Primero seleccione un distrito</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="horas">N° Horas:</label>
+                <input type="number" id="horas" min="0" max="999" required oninput="validarLongitud(this, 3)" />
+              </div>
+
+              <div class="form-group">
+                <label for="semestre">Semestre:</label>
+                <input type="text" id="semestre" required />
+              </div>
+
+              <div class="form-group">
+                <label for="fechaInicio">Fecha de Inicio:</label>
+                <input type="date" id="fechaInicio" required />
+              </div>
+
+              <div class="form-group">
+                <label for="fechaFin">Fecha de Finalización:</label>
+                <input type="date" id="fechaFin" required />
+              </div>
+
+              <div class="form-group">
+                <label for="estudiantes">N° de Estudiantes:</label>
+                <input type="number" id="estudiantes" min="1" max="999" required oninput="validarLongitud(this, 3)" />
+              </div>
+
+              <div class="form-group">
+                <label for="servicio">Servicio:</label>
+                <input type="text" id="servicio" required />
+              </div>
+
+              <div class="form-group">
+                <label for="tutor">Tutores Académicos:</label>
+                <input type="text" id="tutor" required />
+                <div id="tutorError" class="error-message"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="disponibilidad-tutor">Disponibilidad Tutor:</label>
+                <select id="disponibilidad-tutor" required>
+                  <option value="">Seleccione disponibilidad</option>
+                  <option value="disponible">Disponible</option>
+                  <option value="parcial">Disponibilidad Parcial</option>
+                  <option value="no_disponible">No Disponible</option>
+                </select>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="observaciones">Observaciones:</label>
+                <textarea id="observaciones" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Guardar Registro
+              </button>
+              <button type="reset" class="btn btn-secondary">
+                <i class="fas fa-undo"></i> Limpiar
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Sección de registros -->
+      <section id="registros" class="content-section">
+        <div class="card">
+          <div class="card-header">
+            <div class="header-content">
+              <h1 id="titulo-carrera"><i class="fas fa-table"></i> Seleccione una carrera</h1>
+              <div class="header-stats">
+                <span class="stat-badge">
+                  <i class="fas fa-database"></i>
+                  <span id="total-registros">0</span> registros
+                </span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card-toolbar">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" id="searchInput" placeholder="Buscar registros...">
+            </div>
+            <button class="btn btn-export" onclick="exportarExcel()">
+              <i class="fas fa-file-export"></i> Exportar a Excel
+            </button>
+          </div>
+          
+          <div class="table-container" id="contenedor-tabla">
+            <div class="empty-state">
+              <i class="fas fa-graduation-cap"></i>
+              <p>Seleccione una carrera para ver los registros</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección para aprobar usuarios -->
+      <section id="aprobar-usuarios" class="content-section" style="display:none;">
+        <div class="card">
+          <div class="card-header">
+            <h1><i class="fas fa-user-check"></i> Solicitudes de Registro Pendientes</h1>
+          </div>
+          <div class="table-container" id="usuarios-pendientes">
+            <div class="empty-state">
+              <i class="fas fa-users"></i>
+              <p>No hay solicitudes pendientes</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección para gestionar recursos -->
+      <section id="gestion-recursos" class="content-section" style="display:none;">
+        <div class="card">
+          <div class="card-header">
+            <h1><i class="fas fa-cog"></i> Gestión de Recursos</h1>
+          </div>
+          <div class="resource-management">
+            <div class="resource-tabs">
+              <button class="tab-btn active" onclick="mostrarRecurso('universidades')">Universidades</button>
+              <button class="tab-btn" onclick="mostrarRecurso('carreras')">Carreras</button>
+              <button class="tab-btn" onclick="mostrarRecurso('distritos')">Distritos</button>
+              <button class="tab-btn" onclick="mostrarRecurso('unidades-salud')">Unidades de Salud</button>
+            </div>
+            
+            <div id="universidades" class="resource-content active">
+              <div class="resource-actions">
+                <input type="text" id="nueva-universidad" placeholder="Nombre de la universidad">
+                <button class="btn btn-primary" onclick="agregarUniversidad()">
+                  <i class="fas fa-plus"></i> Agregar
+                </button>
+              </div>
+              <div class="resource-list" id="lista-universidades">
+                <!-- Lista de universidades se cargará aquí -->
+              </div>
+            </div>
+            
+            <div id="carreras" class="resource-content">
+              <div class="resource-actions">
+                <input type="text" id="nueva-carrera" placeholder="Nombre de la carrera">
+                <button class="btn btn-primary" onclick="agregarCarrera()">
+                  <i class="fas fa-plus"></i> Agregar
+                </button>
+              </div>
+              <div class="resource-list" id="lista-carreras-admin">
+                <!-- Lista de carreras se cargará aquí -->
+              </div>
+            </div>
+            
+            <div id="distritos" class="resource-content">
+              <div class="resource-actions">
+                <input type="text" id="nuevo-distrito-codigo" placeholder="Código del distrito">
+                <input type="text" id="nuevo-distrito-nombre" placeholder="Nombre del distrito">
+                <button class="btn btn-primary" onclick="agregarDistrito()">
+                  <i class="fas fa-plus"></i> Agregar
+                </button>
+              </div>
+              <div class="resource-list" id="lista-distritos">
+                <!-- Lista de distritos se cargará aquí -->
+              </div>
+            </div>
+            
+            <div id="unidades-salud" class="resource-content">
+              <div class="resource-actions">
+                <select id="distrito-unidad-salud">
+                  <option value="">Seleccione un distrito</option>
+                </select>
+                <input type="text" id="nueva-unidad-salud" placeholder="Nombre de la unidad">
+                <input type="text" id="tipologia-unidad-salud" placeholder="Tipología (ej. CS-A)">
+                <button class="btn btn-primary" onclick="agregarUnidadSalud()">
+                  <i class="fas fa-plus"></i> Agregar
+                </button>
+              </div>
+              <div class="resource-list" id="lista-unidades-salud">
+                <!-- Lista de unidades de salud se cargará aquí -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

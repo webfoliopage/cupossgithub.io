@@ -1,0 +1,123 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Cupos - Centros de Salud</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">🏥</div>
+            <div class="logo-text">COORDINACIÓN ZONAL 3 - SALUD</div>
+        </div>
+        <nav>
+            <a href="login.html" class="btn-login">
+                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+            </a>
+        </nav>
+    </header>
+
+    <!-- Carrusel -->
+    <div class="carousel">
+        <div class="slides">
+            <div class="slide active">
+                <div class="slide-overlay"></div>
+                <img src="imagenes/guamani.jpg" alt="Centro de salud Guamani">
+                <div class="caption">
+                    <h1>Gestión Eficiente de Cupos</h1>
+                    <p>Consulta disponibilidad en todos los centros de salud.</p>
+                    <div class="caption-line"></div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-overlay"></div>
+                <img src="imagenes/liza.jpg" alt="Distrito Liza">
+                <div class="caption">
+                    <h1>Distritos Organizados</h1>
+                    <p>Visualiza datos segmentados por ubicación.</p>
+                    <div class="caption-line"></div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-overlay"></div>
+                <img src="imagenes/srosa.png" alt="Centro de salud Santa Rosa">
+                <div class="caption">
+                    <h1>Acceso Rápido</h1>
+                    <p>Gestiona registros en segundos.</p>
+                    <div class="caption-line"></div>
+                </div>
+            </div>
+        </div>
+        <button class="prev" aria-label="Slide anterior">&#10094;</button>
+        <button class="next" aria-label="Slide siguiente">&#10095;</button>
+        <div class="indicators"></div>
+    </div>
+
+    <!-- Sección informativa -->
+    <section class="info-section">
+        <div class="container">
+            <h2>Sobre el Sistema</h2>
+            <div class="divider"></div>
+            <p>
+                Esta plataforma permite monitorear y gestionar la disponibilidad de cupos en los centros de salud 
+                de cada distrito, garantizando una administración eficiente y un mejor servicio a los pacientes.
+            </p>
+            <a href="login.html" class="btn-primary">
+                <i class="fas fa-lock"></i> Acceder al Sistema
+            </a>
+        </div>
+    </section>
+
+    <!-- Características -->
+    <section class="features">
+        <div class="container">
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Datos Actualizados</h3>
+                <p>Información en tiempo real para una mejor toma de decisiones.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-map-marked-alt"></i></div>
+                <h3>Distritos Claros</h3>
+                <p>Organización por zonas para un control eficiente.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-bolt"></i></div>
+                <h3>Rápido y Seguro</h3>
+                <p>Gestión optimizada con seguridad en el manejo de datos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content container">
+            <div class="footer-section">
+                <div class="footer-logo">🏥 Salud Distrital</div>
+                <p>Sistema de gestión de cupos en centros de salud.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Enlaces</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                    <li><a href="login.html"><i class="fas fa-chevron-right"></i> Iniciar Sesión</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p><i class="fas fa-envelope"></i> info@saluddistrital.com</p>
+                <p><i class="fas fa-phone"></i> +593 999 999 999</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Salud Distrital | Centro de Salud</p>
+        </div>
+    </footer>
+    <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta de Cupos por Carrera</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="usuario.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <i class="fas fa-graduation-cap"></i>
+        <h1>Gestión de Pasantías</h1>
+      </div>
+      
+      <div class="carreras-filter">
+        <h3><i class="fas fa-filter"></i> Filtrar por Carrera</h3>
+        <div class="search-carrera">
+          <i class="fas fa-search"></i>
+          <input type="text" id="buscar-carrera" placeholder="Buscar carrera...">
+        </div>
+        <ul class="lista-carreras">
+          <li data-carrera="PSICOLOGIA"><i class="fas fa-brain"></i> Psicología</li>
+          <li data-carrera="LABORATORIO CLINICO"><i class="fas fa-flask"></i> Laboratorio Clínico</li>
+          <li data-carrera="ENFERMERIA"><i class="fas fa-user-nurse"></i> Enfermería</li>
+          <li data-carrera="TECNICOS EN ENFERMERIA"><i class="fas fa-user-md"></i> Técnicos en Enfermería</li>
+          <li data-carrera="TECNICOS EN REHABILITACION"><i class="fas fa-wheelchair"></i> Técnicos en Rehabilitación</li>
+          <li data-carrera="TECNICOS EN LABORATORIO"><i class="fas fa-vial"></i> Técnicos en Laboratorio</li>
+          <li data-carrera="APH"><i class="fas fa-ambulance"></i> APH</li>
+          <li data-carrera="AUXILIAR EN ENFERMERIA"><i class="fas fa-hand-holding-medical"></i> Auxiliar en Enfermería</li>
+          <li data-carrera="MEDICINA"><i class="fas fa-stethoscope"></i> Medicina</li>
+          <li data-carrera="FISIOTERAPIA"><i class="fas fa-spa"></i> Fisioterapia</li>
+          <li data-carrera="NUTRICION"><i class="fas fa-utensils"></i> Nutrición</li>
+          <li data-carrera="BIOQUIMICA"><i class="fas fa-microscope"></i> Bioquímica</li>
+          <li data-carrera="AUXILIAR DE FARMACIA"><i class="fas fa-pills"></i> Auxiliar de Farmacia</li>
+          <li data-carrera="ODONTOLOGIA"><i class="fas fa-tooth"></i> Odontología</li>
+        </ul>
+
+        <!-- Botón de Cerrar Sesión -->
+        <div class="logout-container">
+          <button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="card">
+        <div class="card-header">
+          <h2 id="titulo-carrera"><i class="fas fa-table"></i> Seleccione una carrera</h2>
+          <div class="carrera-stats">
+            <div class="stat-item">
+              <i class="fas fa-users"></i>
+              <span id="total-cupos">0</span> cupos totales
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-calendar-check"></i>
+              <span id="cupos-activos">0</span> activos
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-clock"></i>
+              <span id="cupos-proximos">0</span> próximos
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-user-graduate"></i>
+              <span id="total-registrados">0</span> registrados
+            </div>
+          </div>
+        </div>
+        
+        <div class="table-container" id="contenedor-tabla">
+          <div class="empty-state">
+            <i class="fas fa-graduation-cap"></i>
+            <p>Seleccione una carrera para ver los cupos disponibles</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmación -->
+<div id="confirmModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <i class="fas fa-user-graduate modal-icon"></i>
+      <h3>Confirmar Registro</h3>
+      <span class="close-modal">&times;</span>
+    </div>
+    <div class="modal-body">
+      <p id="modal-message"></p>
+      <div class="modal-footer">
+        <button id="cancel-register" class="modal-btn secondary">
+          <i class="fas fa-times"></i> Cancelar
+        </button>
+        <button id="confirm-register" class="modal-btn primary">
+          <i class="fas fa-check"></i> Confirmar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script>
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      sessionStorage.removeItem('currentUser');
+      window.location.href = 'login.html';
+    });
+  </script>
+  <script src="usuario.js"></script>
+  <script src="js/auth-check.js"></script>
+</body>
+</html>

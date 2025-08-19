@@ -1,0 +1,81 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Pasantías | Acceso</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="logo">
+          <i class="fas fa-user-graduate"></i>
+          <h1>Sistema de Pasantías</h1>
+        </div>
+        <p class="tagline">Gestión de prácticas profesionales</p>
+      </div>
+      
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="login">Iniciar Sesión</button>
+        <button class="tab-btn" data-tab="register">Registrarse</button>
+      </div>
+      
+      <!-- Contenido de Login -->
+      <div class="tab-content active" id="login">
+        <form id="loginForm" class="auth-form">
+          <div class="input-group">
+            <label for="loginUsername"><i class="fas fa-user"></i> Usuario</label>
+            <input type="text" id="loginUsername" placeholder="Ingrese su usuario" required>
+          </div>
+          <div class="input-group">
+            <label for="loginPassword"><i class="fas fa-lock"></i> Contraseña</label>
+            <div class="password-wrapper">
+              <input type="password" id="loginPassword" placeholder="Ingrese su contraseña" required>
+              <i class="fas fa-eye toggle-password" data-target="loginPassword"></i>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-sign-in-alt"></i> Ingresar
+          </button>
+          <p class="error" id="loginError"></p>
+        </form>
+      </div>
+      
+      <!-- Contenido de Registro -->
+      <div class="tab-content" id="register">
+        <form id="registerForm" class="auth-form">
+          <div class="input-group">
+            <label for="regUsername"><i class="fas fa-user"></i> Nombre de usuario</label>
+            <input type="text" id="regUsername" placeholder="Ej: juan_perez" required>
+          </div>
+          <div class="input-group">
+            <label for="regEmail"><i class="fas fa-envelope"></i> Correo electrónico</label>
+            <input type="email" id="regEmail" placeholder="Ej: juan@email.com" required>
+          </div>
+          <div class="input-group">
+            <label for="regPassword"><i class="fas fa-lock"></i> Contraseña</label>
+            <div class="password-wrapper">
+              <input type="password" id="regPassword" placeholder="Mínimo 8 caracteres" required>
+              <i class="fas fa-eye toggle-password" data-target="regPassword"></i>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="regConfirmPassword"><i class="fas fa-lock"></i> Confirmar contraseña</label>
+            <input type="password" id="regConfirmPassword" placeholder="Repita su contraseña" required>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-user-plus"></i> Registrarse
+          </button>
+          <p class="error" id="registerError"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>
